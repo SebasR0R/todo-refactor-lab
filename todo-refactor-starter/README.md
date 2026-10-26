@@ -83,7 +83,7 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 7 | Pamela | Sebasti├ín || 7 eliminarTarea | Las pruebas fallaban porque la función no estaba implementada. | tareas.filter(t => t.id !== id) | Sin cambios. |
 | 8 `obtenerResumen` | Pamela | Sebasti├ín | Las pruebas fallaban porque la función no estaba implementada. | Reutiliza `obtenerPendientes` y `obtenerTerminadas` | Sin cambios. |
 | 9 | Pamela | Sebasti├ín || 9 filtrarPorEstado | Las pruebas fallaban porque la función no existía. | if/return según el filtro, reutilizando obtenerPendientes y obtenerTerminadas | La lógica del filtro salió de app.js y quedó en el dominio. |
-| 10 | Sebasti├ín | Pamela |
+| 10 `esTituloValido` |Sebasti├ín | Pamela| Las pruebas fallaban porque la función no existía. | `typeof titulo === "string" && titulo.trim().length > 0` | La validación salió del DOM y pasó al dominio con su prueba. |
 | 11 | Pamela | Sebasti├ín |
 
 ## Decisiones de diseño
@@ -93,6 +93,10 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 - **M6 `cambiarEstado`:** `map` conserva el tamaño de la colección y el spread crea un objeto nuevo en lugar de modificar el original.
 - ** M7 eliminarTarea:* se usa filter porque la intención es "conservar todos excepto uno". map conserva el tamaño de la colección y find solo devuelve un elemento.
 - **M8 `obtenerResumen`:** reutilizar comunica mejor la intención y no duplica la regla de "pendiente", pero recorre el arreglo dos veces. Calcular directo con `reduce` hace menos trabajo pero repite la lógica. Para este tamaño, reutilizar es más mantenible.
+## Refactor final (Misión 10)
+
+1. **`render()` separada en `renderLista()` y `renderResumen()`:** cada función hace una sola cosa. `npm test` siguió en verde.
+2. **`esTituloValido(titulo)` en `taskService.js`:** la validación pasó de `app.js` al dominio y tiene su propia prueba. `npm test` siguió en verde.
 
 ## Pruebas manuales de integración
 
