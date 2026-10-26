@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
+  filtrarPorEstado,
   agregarTarea,
   crearTarea,
   agregarTarea,
@@ -103,5 +104,21 @@ describe("obtenerResumen", () => {
   });
   it("con colección vacía devuelve ceros", () => {
     expect(obtenerResumen([])).toEqual({ total: 0, pendientes: 0, terminadas: 0 });
+  });
+});
+
+describe("filtrarPorEstado", () => {
+  const tareas = [
+    { id: 1, titulo: "A", completada: false },
+    { id: 2, titulo: "B", completada: true },
+  ];
+  it("'todas' devuelve todo", () => {
+    expect(filtrarPorEstado(tareas, "todas")).toEqual(tareas);
+  });
+  it("'pendientes' devuelve solo pendientes", () => {
+    expect(filtrarPorEstado(tareas, "pendientes")).toHaveLength(1);
+  });
+  it("'terminadas' devuelve solo terminadas", () => {
+    expect(filtrarPorEstado(tareas, "terminadas")).toHaveLength(1);
   });
 });
