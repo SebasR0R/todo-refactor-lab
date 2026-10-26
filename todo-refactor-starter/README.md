@@ -26,18 +26,23 @@ La primera prueba está preparada para fallar: es el punto de partida de la **Mi
 
 ## Misión 0 · Antes de modificar código
 
-Responde aquí:
+1. **¿Dónde almacenarías ahora el estado `completada` de una tarea?**
+   En un objeto por tarea (`{ id, titulo, completada }`). Con strings no hay dónde guardarlo sin crear un segundo array paralelo que habría que mantener sincronizado.
 
-1. ¿Dónde almacenarías ahora el estado `completada` de una tarea?
-2. ¿Qué ocurriría si mañana cada tarea necesita prioridad, fecha o responsable?
-3. ¿Qué parte del código representa datos y qué parte representa interfaz?
-4. ¿Qué comportamiento debemos conservar durante el refactor?
+2. **¿Qué ocurriría si mañana cada tarea necesita prioridad, fecha o responsable?**
+   Con strings habría que concatenar datos en el texto o crear más arrays paralelos, lo que se rompe fácil. Con objetos solo se agrega una propiedad nueva a cada tarea.
+
+3. **¿Qué parte del código representa datos y qué parte representa interfaz?**
+   El array `tareas` son datos. `querySelector`, `innerHTML` y el `for` que arma los `<li>` son interfaz. Están mezclados dentro de `mostrarTareas()`, por eso no se puede probar la lógica sin el navegador.
+
+4. **¿Qué comportamiento debemos conservar durante el refactor?**
+   Que la app siga mostrando las tareas, permitiendo agregar nuevas y rechazando títulos vacíos (detalle abajo).
 
 ### Tres comportamientos observables que NO deben cambiar
 
-1. 
-2. 
-3. 
+1. Al abrir la app se muestran las tareas iniciales (Revisar requisitos, Diseñar pruebas, Refactorizar código).
+2. Agregar una tarea con título válido la añade al final de la lista.
+3. Un título vacío no se agrega a la lista.
 
 ## Registro RED → GREEN → REFACTOR
 
@@ -49,4 +54,19 @@ Documenta al menos una iteración:
 
 ## Pair Programming
 
-Registra por misión quién fue **Driver** y quién **Navigator**. Intercambien roles con frecuencia y no hagan commit hasta que ambos puedan explicar el código y la prueba.
+Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión y no hacemos commit hasta que ambos podamos explicar el código y la prueba.
+
+| Misión | Driver | Navigator |
+|---|---|---|
+| 0 | Sebastián | Pamela |
+| 1 | Pamela | Sebastián |
+| 2 | Sebastián | Pamela |
+| 3 | Pamela | Sebastián |
+| 4 | Sebastián | Pamela |
+| 5 | Pamela | Sebastián |
+| 6 | Sebastián | Pamela |
+| 7 | Pamela | Sebastián |
+| 8 | Sebastián | Pamela |
+| 9 | Pamela | Sebastián |
+| 10 | Sebastián | Pamela |
+| 11 | Pamela | Sebastián |
