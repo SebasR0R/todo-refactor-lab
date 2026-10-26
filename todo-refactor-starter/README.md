@@ -82,14 +82,27 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 6 | Sebasti├ín | Pamela |
 | 7 | Pamela | Sebasti├ín || 7 eliminarTarea | Las pruebas fallaban porque la función no estaba implementada. | tareas.filter(t => t.id !== id) | Sin cambios. |
 | 8 `obtenerResumen` | Pamela | Sebasti├ín | Las pruebas fallaban porque la función no estaba implementada. | Reutiliza `obtenerPendientes` y `obtenerTerminadas` | Sin cambios. |
-| 9 | Pamela | Sebasti├ín |
+| 9 | Pamela | Sebasti├ín || 9 filtrarPorEstado | Las pruebas fallaban porque la función no existía. | if/return según el filtro, reutilizando obtenerPendientes y obtenerTerminadas | La lógica del filtro salió de app.js y quedó en el dominio. |
 | 10 | Sebasti├ín | Pamela |
 | 11 | Pamela | Sebasti├ín |
 
 ## Decisiones de diseño
 
-- *M3 agregarTarea:* si la funci├│n mutara el array recibido, la prueba que lo detssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssswsta es verificar que el array original conserva su longitud despu├⌐s de llamarla.
-- *M5 filter:* cuando no hay coincidencias devuelve [], no undefined ni un error.
+- ** M3 agregarTarea:* si la funci├│n mutara el array recibido, la prueba que lo detssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssswsta es verificar que el array original conserva su longitud despu├⌐s de llamarla.
+- ** M5 filter:* cuando no hay coincidencias devuelve [], no undefined ni un error.
 - **M6 `cambiarEstado`:** `map` conserva el tamaño de la colección y el spread crea un objeto nuevo en lugar de modificar el original.
-- *M7 eliminarTarea:* se usa filter porque la intención es "conservar todos excepto uno". map conserva el tamaño de la colección y find solo devuelve un elemento.
+- ** M7 eliminarTarea:* se usa filter porque la intención es "conservar todos excepto uno". map conserva el tamaño de la colección y find solo devuelve un elemento.
 - **M8 `obtenerResumen`:** reutilizar comunica mejor la intención y no duplica la regla de "pendiente", pero recorre el arreglo dos veces. Calcular directo con `reduce` hace menos trabajo pero repite la lógica. Para este tamaño, reutilizar es más mantenible.
+
+## Pruebas manuales de integración
+
+| Escenario | Acción | Esperado | Resultado |
+|---|---|---|---|
+| Alta válida | Escribir título + Agregar | Aparece una tarea pendiente y cambia el resumen | ✅ |
+| Alta inválida | Enviar título vacío | No se agrega y se muestra un mensaje | ✅ |
+| Cambio de estado | Click en Completar | Se tacha y cambian los contadores | ✅ |
+| Filtro | Click en Pendientes | Solo se muestran las pendientes | ✅ |
+| Eliminar | Click en Eliminar | Desaparece y se actualiza el resumen | ✅ |
+
+** Fallos encontrados:** 
+1. **Entrada:** Ejecución de `git commit` para la misión de filtrado. → **Observado:** El comando se canceló por accidente debido a una comilla faltante (`^C`) y no se creó el commit independiente. → **Esperado:** Commit registrado correctamente. → **Corrección:** El código ya iba incluido de forma segura en el siguiente commit exitoso de integración (`feat: integrar taskService con app.js`), validando que las pruebas pasaran al 100% sin afectar el proyecto.
