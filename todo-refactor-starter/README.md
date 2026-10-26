@@ -72,7 +72,7 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 0 | Sebastián | Pamela |
 | 1 | Pamela | Sebastián |
 |2 `crearTarea`| Sebastián | Pamela || Devolver `{ id, titulo, completada: false }`, el mínimo para que la prueba pasara. | Sin cambios: los nombres `id`, `titulo` y `completada` ya expresan la intención. |
-| 3 | Pamela | Sebastián |
+| 3 `agregarTarea` | Pamela | Sebastián | Las 3 pruebas fallaban porque la función no estaba implementada. | `return [...tareas, nuevaTarea]` | Sin cambios. |
 | 4 `buscarTarea` | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `tareas.find(t => t.id === id)` | Sin cambios. |
 | 5 | Pamela | Sebastián |
 | 6 | Sebastián | Pamela |
