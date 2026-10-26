@@ -30,17 +30,17 @@ La primera prueba está preparada para fallar: es el punto de partida de la **Mi
    En un objeto por tarea (`{ id, titulo, completada }`). Con strings no hay dónde guardarlo sin crear un segundo array paralelo que habría que mantener sincronizado.
 
 2. **¿Qué ocurriría si mañana cada tarea necesita prioridad, fecha o responsable?**
-   Con strings habría que concatenar datos en el texto o crear más arrays paralelos, lo que se rompe fácil. Con objetos solo se agrega una propiedad nueva a cada tarea.
+   Con strings habría que concatenar datos en el texto o crear más arrays paralelos, lo que se rompe fácil. Con objetos solo se agrega una propiedad.
 
 3. **¿Qué parte del código representa datos y qué parte representa interfaz?**
-   El array `tareas` son datos. `querySelector`, `innerHTML` y el `for` que arma los `<li>` son interfaz. Están mezclados dentro de `mostrarTareas()`, por eso no se puede probar la lógica sin el navegador.
+   El array `tareas` son datos. `querySelector`, `innerHTML` y el `for` que arma los `<li>` son interfaz. Están mezclados en `mostrarTareas()`, por eso no se puede probar la lógica sin el navegador.
 
 4. **¿Qué comportamiento debemos conservar durante el refactor?**
-   Que la app siga mostrando las tareas, permitiendo agregar nuevas y rechazando títulos vacíos (detalle abajo).
+   Que la app siga mostrando las tareas, permitiendo agregar nuevas y rechazando títulos vacíos.
 
 ### Tres comportamientos observables que NO deben cambiar
 
-1. Al abrir la app se muestran las tareas iniciales (Revisar requisitos, Diseñar pruebas, Refactorizar código).
+1. Al abrir la app se muestran las tareas iniciales.
 2. Agregar una tarea con título válido la añade al final de la lista.
 3. Un título vacío no se agrega a la lista.
 
@@ -71,7 +71,7 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 |---|---|---|
 | 0 | Sebastián | Pamela |
 | 1 | Pamela | Sebastián |
-| 2 | Sebastián | Pamela |
+|2 `crearTarea`| Sebastián | Pamela || Devolver `{ id, titulo, completada: false }`, el mínimo para que la prueba pasara. | Sin cambios: los nombres `id`, `titulo` y `completada` ya expresan la intención. |
 | 3 | Pamela | Sebastián |
 | 4 | Sebastián | Pamela |
 | 5 | Pamela | Sebastián |
