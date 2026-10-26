@@ -67,3 +67,14 @@ describe("agregarTarea", () => {
     expect(tareas).toHaveLength(1);
   });
 });
+describe("buscarTarea", () => {
+  const tareas = [crearTarea(1, "A"), crearTarea(2, "B")];
+
+  it("encuentra una tarea por id existente", () => {
+    expect(buscarTarea(tareas, 2)).toEqual({ id: 2, titulo: "B", completada: false });
+  });
+
+  it("devuelve undefined si el id no existe", () => {
+    expect(buscarTarea(tareas, 99)).toBeUndefined();
+  });
+});
