@@ -75,7 +75,7 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 3 `agregarTarea` | Pamela | Sebastián | Las 3 pruebas fallaban porque la función no estaba implementada. | `return [...tareas, nuevaTarea]` | Sin cambios. |
 | 4 `buscarTarea` | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `tareas.find(t => t.id === id)` | Sin cambios. |
 | 5 | Pamela | Sebastián |
-| 6 | Sebastián | Pamela |
+|  6 `cambiarEstado`  | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `map` con `{ ...tarea, completada: !tarea.completada }` | Sin cambios. |
 | 7 | Pamela | Sebastián |
 | 8 | Sebastián | Pamela |
 | 9 | Pamela | Sebastián |
