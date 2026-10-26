@@ -44,13 +44,24 @@ La primera prueba está preparada para fallar: es el punto de partida de la **Mi
 2. Agregar una tarea con título válido la añade al final de la lista.
 3. Un título vacío no se agrega a la lista.
 
+## Misión 1 · Modelo de tarea
+
+Una tarea deja de ser un string y pasa a ser un objeto:
+
+js
+{ id: 1, titulo: "Diseñar pruebas", completada: false }
+
+
+- *Pertenece a la tarea:* id, titulo y completada.
+- *Pertenece a la interfaz:* el filtro activo, el mensaje de error, el texto del input y las clases CSS.
+
+El array de objetos se aplica en el código en la Misión 9, cuando se integra con app.js.
+
 ## Registro RED → GREEN → REFACTOR
 
-Documenta al menos una iteración:
-
-- **RED:** ¿qué prueba escribiste y por qué falló?
-- **GREEN:** ¿cuál fue el cambio mínimo que la hizo pasar?
-- **REFACTOR:** ¿qué mejoraste sin cambiar el comportamiento?
+| Misión | RED (qué falló) | GREEN (cambio mínimo) | REFACTOR (qué mejoró) |
+|---|---|---|---|
+| 2 crearTarea | La prueba "crea una tarea pendiente con id y título" falló con Error: Misión 2 pendiente: implementar crearTarea(), porque la función solo lanzaba un error. | (pendiente) | (pendiente) |
 
 ## Pair Programming
 
