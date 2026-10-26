@@ -92,3 +92,16 @@ describe("eliminarTarea", () => {
     expect(eliminarTarea([], 1)).toEqual([]);
   });
 });
+describe("obtenerResumen", () => {
+  it("cuenta total, pendientes y terminadas", () => {
+    const tareas = [
+      { id: 1, titulo: "A", completada: false },
+      { id: 2, titulo: "B", completada: true },
+      { id: 3, titulo: "C", completada: false },
+    ];
+    expect(obtenerResumen(tareas)).toEqual({ total: 3, pendientes: 2, terminadas: 1 });
+  });
+  it("con colección vacía devuelve ceros", () => {
+    expect(obtenerResumen([])).toEqual({ total: 0, pendientes: 0, terminadas: 0 });
+  });
+});

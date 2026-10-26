@@ -81,7 +81,7 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 5 | Pamela | Sebasti├ín || 5 obtenerPendientes / obtenerTerminadas | Las pruebas fallaban porque las funciones no estaban implementadas. | filter(t => !t.completada) y filter(t => t.completada) | Sin cambios. |
 | 6 | Sebasti├ín | Pamela |
 | 7 | Pamela | Sebasti├ín || 7 eliminarTarea | Las pruebas fallaban porque la función no estaba implementada. | tareas.filter(t => t.id !== id) | Sin cambios. |
-| 8 | Sebasti├ín | Pamela |
+| 8 `obtenerResumen` | Pamela | Sebasti├ín | Las pruebas fallaban porque la función no estaba implementada. | Reutiliza `obtenerPendientes` y `obtenerTerminadas` | Sin cambios. |
 | 9 | Pamela | Sebasti├ín |
 | 10 | Sebasti├ín | Pamela |
 | 11 | Pamela | Sebasti├ín |
@@ -92,3 +92,4 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 - *M5 filter:* cuando no hay coincidencias devuelve [], no undefined ni un error.
 - **M6 `cambiarEstado`:** `map` conserva el tamaño de la colección y el spread crea un objeto nuevo en lugar de modificar el original.
 - *M7 eliminarTarea:* se usa filter porque la intención es "conservar todos excepto uno". map conserva el tamaño de la colección y find solo devuelve un elemento.
+- **M8 `obtenerResumen`:** reutilizar comunica mejor la intención y no duplica la regla de "pendiente", pero recorre el arreglo dos veces. Calcular directo con `reduce` hace menos trabajo pero repite la lógica. Para este tamaño, reutilizar es más mantenible.
