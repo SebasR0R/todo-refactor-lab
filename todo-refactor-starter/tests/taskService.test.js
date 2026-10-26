@@ -122,3 +122,17 @@ describe("filtrarPorEstado", () => {
     expect(filtrarPorEstado(tareas, "terminadas")).toHaveLength(1);
   });
 });
+describe("esTituloValido", () => {
+  it("acepta un título con texto", () => {
+    expect(esTituloValido("Estudiar")).toBe(true);
+  });
+  it("rechaza vacío", () => {
+    expect(esTituloValido("")).toBe(false);
+  });
+  it("rechaza solo espacios", () => {
+    expect(esTituloValido("   ")).toBe(false);
+  });
+  it("rechaza valores que no son texto", () => {
+    expect(esTituloValido(undefined)).toBe(false);
+  });
+});
