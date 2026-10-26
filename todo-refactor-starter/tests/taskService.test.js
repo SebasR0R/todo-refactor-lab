@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
+  agregarTarea,
   crearTarea,
   agregarTarea,
   buscarTarea,
@@ -46,3 +47,23 @@ void obtenerTerminadas;
 void cambiarEstado;
 void eliminarTarea;
 void obtenerResumen;
+
+describe("agregarTarea", () => {
+  it("devuelve la colección con la nueva tarea al final", () => {
+    const tareas = [crearTarea(1, "A")];
+    const nueva = crearTarea(2, "B");
+    expect(agregarTarea(tareas, nueva)).toEqual([tareas[0], nueva]);
+  });
+
+  it("devuelve una colección con un elemento más", () => {
+    const tareas = [crearTarea(1, "A")];
+    const resultado = agregarTarea(tareas, crearTarea(2, "B"));
+    expect(resultado).toHaveLength(tareas.length + 1);
+  });
+
+  it("no modifica el array original", () => {
+    const tareas = [crearTarea(1, "A")];
+    agregarTarea(tareas, crearTarea(2, "B"));
+    expect(tareas).toHaveLength(1);
+  });
+});
