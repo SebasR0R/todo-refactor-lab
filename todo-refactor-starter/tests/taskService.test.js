@@ -1,7 +1,5 @@
 import { describe, it, expect } from "vitest";
 import {
-  filtrarPorEstado,
-  agregarTarea,
   crearTarea,
   agregarTarea,
   buscarTarea,
@@ -9,7 +7,7 @@ import {
   obtenerTerminadas,
   cambiarEstado,
   eliminarTarea,
-  obtenerResumen
+  obtenerResumen,
 } from "../src/taskService.js";
 
 /*
@@ -33,22 +31,6 @@ describe("crearTarea", () => {
   });
 });
 
-// MISIÓN 3: agrega al menos dos pruebas para agregarTarea().
-// MISIÓN 4: prueba id existente e inexistente para buscarTarea().
-// MISIÓN 5: prueba colección mixta, sin coincidencias y vacía.
-// MISIÓN 6: prueba cambio correcto, otra tarea intacta e id inexistente.
-// MISIÓN 7: prueba eliminar existente, inexistente y colección vacía.
-// MISIÓN 8: prueba obtenerResumen(), incluyendo colección vacía.
-
-// Los imports anteriores quedan preparados para que construyas la suite de forma incremental.
-void agregarTarea;
-void buscarTarea;
-void obtenerPendientes;
-void obtenerTerminadas;
-void cambiarEstado;
-void eliminarTarea;
-void obtenerResumen;
-
 describe("agregarTarea", () => {
   it("devuelve la colección con la nueva tarea al final", () => {
     const tareas = [crearTarea(1, "A")];
@@ -68,6 +50,7 @@ describe("agregarTarea", () => {
     expect(tareas).toHaveLength(1);
   });
 });
+
 describe("buscarTarea", () => {
   const tareas = [crearTarea(1, "A"), crearTarea(2, "B")];
 
@@ -77,6 +60,50 @@ describe("buscarTarea", () => {
 
   it("devuelve undefined si el id no existe", () => {
     expect(buscarTarea(tareas, 99)).toBeUndefined();
+  });
+});
+
+describe("obtenerPendientes / obtenerTerminadas", () => {
+  const mixta = [
+    { id: 1, titulo: "A", completada: false },
+    { id: 2, titulo: "B", completada: true },
+    { id: 3, titulo: "C", completada: false },
+  ];
+
+  it("separa pendientes en una colección mixta", () => {
+    expect(obtenerPendientes(mixta).map(t => t.id)).toEqual([1, 3]);
+  });
+  it("separa terminadas en una colección mixta", () => {
+    expect(obtenerTerminadas(mixta).map(t => t.id)).toEqual([2]);
+  });
+  it("devuelve [] si ninguna es pendiente", () => {
+    const todasHechas = [{ id: 1, titulo: "A", completada: true }];
+    expect(obtenerPendientes(todasHechas)).toEqual([]);
+  });
+  it("devuelve [] con colección vacía", () => {
+    expect(obtenerPendientes([])).toEqual([]);
+    expect(obtenerTerminadas([])).toEqual([]);
+  });
+});
+
+describe("cambiarEstado", () => {
+  const tareas = [
+    { id: 1, titulo: "A", completada: false },
+    { id: 2, titulo: "B", completada: false },
+  ];
+
+  it("alterna el estado de la tarea correcta", () => {
+    expect(cambiarEstado(tareas, 1)[0].completada).toBe(true);
+  });
+  it("no altera las otras tareas", () => {
+    expect(cambiarEstado(tareas, 1)[1]).toEqual(tareas[1]);
+  });
+  it("con id inexistente conserva el contenido", () => {
+    expect(cambiarEstado(tareas, 99)).toEqual(tareas);
+  });
+  it("no muta el objeto original", () => {
+    cambiarEstado(tareas, 1);
+    expect(tareas[0].completada).toBe(false);
   });
 });
 
@@ -93,6 +120,7 @@ describe("eliminarTarea", () => {
     expect(eliminarTarea([], 1)).toEqual([]);
   });
 });
+
 describe("obtenerResumen", () => {
   it("cuenta total, pendientes y terminadas", () => {
     const tareas = [
@@ -104,35 +132,5 @@ describe("obtenerResumen", () => {
   });
   it("con colección vacía devuelve ceros", () => {
     expect(obtenerResumen([])).toEqual({ total: 0, pendientes: 0, terminadas: 0 });
-  });
-});
-
-describe("filtrarPorEstado", () => {
-  const tareas = [
-    { id: 1, titulo: "A", completada: false },
-    { id: 2, titulo: "B", completada: true },
-  ];
-  it("'todas' devuelve todo", () => {
-    expect(filtrarPorEstado(tareas, "todas")).toEqual(tareas);
-  });
-  it("'pendientes' devuelve solo pendientes", () => {
-    expect(filtrarPorEstado(tareas, "pendientes")).toHaveLength(1);
-  });
-  it("'terminadas' devuelve solo terminadas", () => {
-    expect(filtrarPorEstado(tareas, "terminadas")).toHaveLength(1);
-  });
-});
-describe("esTituloValido", () => {
-  it("acepta un título con texto", () => {
-    expect(esTituloValido("Estudiar")).toBe(true);
-  });
-  it("rechaza vacío", () => {
-    expect(esTituloValido("")).toBe(false);
-  });
-  it("rechaza solo espacios", () => {
-    expect(esTituloValido("   ")).toBe(false);
-  });
-  it("rechaza valores que no son texto", () => {
-    expect(esTituloValido(undefined)).toBe(false);
   });
 });

@@ -15,7 +15,7 @@ let tareas = ["Revisar requisitos", "Diseñar pruebas", "Refactorizar código"]
 let siguienteId = tareas.length + 1;
 let filtro = "todas";
 
-function render() {
+function renderLista() {
   list.innerHTML = "";
   filtrarPorEstado(tareas, filtro).forEach(tarea => {
     const li = document.createElement("li");
@@ -34,9 +34,16 @@ function render() {
     li.append(titulo, acciones);
     list.appendChild(li);
   });
+}
 
+function renderResumen() {
   const { total, pendientes, terminadas } = obtenerResumen(tareas);
-summary.textContent = `Total: ${total} · Pendientes: ${pendientes} · Terminadas: ${terminadas}`;
+  summary.textContent = `Total: ${total} · Pendientes: ${pendientes} · Terminadas: ${terminadas}`;
+}
+
+function render() {
+  renderLista();
+  renderResumen();
 }
 
 form.addEventListener("submit", (event) => {
@@ -65,5 +72,11 @@ filters.forEach(button => button.addEventListener("click", () => {
   filters.forEach(b => b.classList.toggle("active", b === button));
   render();
 }));
+
+const titulo = input.value.trim();
+if (!esTituloValido(titulo)) {
+  message.textContent = "Escribe un título antes de agregar.";
+  return;
+}
 
 render();

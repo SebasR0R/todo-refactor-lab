@@ -20,6 +20,7 @@ export function agregarTarea(tareas, nuevaTarea) {
 export function buscarTarea(tareas, id) {
   return tareas.find(t => t.id === id);
 }
+
 // MISIÓN 5
 export function obtenerPendientes(tareas) {
   return tareas.filter(t => !t.completada);
@@ -38,8 +39,7 @@ export function cambiarEstado(tareas, id) {
 
 // MISIÓN 7
 export function eliminarTarea(tareas, id) {
-  // TODO: conservar todos excepto el id indicado.
-  throw new Error("Misión 7 pendiente: implementar eliminarTarea()");
+  return tareas.filter(t => t.id !== id);
 }
 
 // MISIÓN 8
@@ -49,21 +49,4 @@ export function obtenerResumen(tareas) {
     pendientes: obtenerPendientes(tareas).length,
     terminadas: obtenerTerminadas(tareas).length,
   };
-}
-export function obtenerPendientes(tareas) {
-  return tareas.filter(t => !t.completada);
-}
-
-export function obtenerTerminadas(tareas) {
-  return tareas.filter(t => t.completada);
-}
-
-export function eliminarTarea(tareas, id) {
-  return tareas.filter(t => t.id !== id);
-}
-
-export function filtrarPorEstado(tareas, filtro) {
-  if (filtro === "pendientes") return obtenerPendientes(tareas);
-  if (filtro === "terminadas") return obtenerTerminadas(tareas);
-  return tareas;
 }
