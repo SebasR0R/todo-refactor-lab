@@ -78,3 +78,17 @@ describe("buscarTarea", () => {
     expect(buscarTarea(tareas, 99)).toBeUndefined();
   });
 });
+
+describe("eliminarTarea", () => {
+  const tareas = [crearTarea(1, "A"), crearTarea(2, "B")];
+
+  it("elimina un id existente", () => {
+    expect(eliminarTarea(tareas, 1)).toEqual([tareas[1]]);
+  });
+  it("con id inexistente deja la colección igual", () => {
+    expect(eliminarTarea(tareas, 99)).toEqual(tareas);
+  });
+  it("con colección vacía devuelve []", () => {
+    expect(eliminarTarea([], 1)).toEqual([]);
+  });
+});
