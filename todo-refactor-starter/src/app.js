@@ -1,11 +1,7 @@
-/*
- * MISIÓN 9 · ADAPTADOR DE INTERFAZ
- *
- * Este archivo contiene una versión inicial de interfaz basada en strings para
- * que la aplicación pueda observarse desde el comienzo. Cuando llegues a la
- * Misión 9, reemplaza la lógica de datos por llamadas a taskService.js.
- * El DOM debe leer eventos, delegar reglas al servicio y renderizar resultados.
- */
+import {
+  crearTarea, agregarTarea, cambiarEstado, eliminarTarea,
+  filtrarPorEstado, obtenerResumen
+} from "./taskService.js";
 
 const form = document.querySelector("#task-form");
 const input = document.querySelector("#task-input");
@@ -14,19 +10,33 @@ const message = document.querySelector("#message");
 const summary = document.querySelector("#summary");
 const filters = [...document.querySelectorAll("[data-filter]")];
 
-let tareas = ["Revisar requisitos", "Diseñar pruebas", "Refactorizar código"];
+let tareas = ["Revisar requisitos", "Diseñar pruebas", "Refactorizar código"]
+  .map((titulo, i) => crearTarea(i + 1, titulo));
+let siguienteId = tareas.length + 1;
 let filtro = "todas";
 
 function render() {
   list.innerHTML = "";
-  tareas.forEach((titulo, index) => {
+  filtrarPorEstado(tareas, filtro).forEach(tarea => {
     const li = document.createElement("li");
-    li.className = "task";
-    li.innerHTML = `<span class="title">${titulo}</span>
-      <span class="task-actions"><button data-delete="${index}">Eliminar</button></span>`;
+    li.className = tarea.completada ? "task done" : "task";
+
+    const titulo = document.createElement("span");
+    titulo.className = "title";
+    titulo.textContent = tarea.titulo;
+
+    const acciones = document.createElement("span");
+    acciones.className = "task-actions";
+    acciones.innerHTML = `
+      <button data-toggle="${tarea.id}">${tarea.completada ? "Reabrir" : "Completar"}</button>
+      <button data-delete="${tarea.id}">Eliminar</button>`;
+
+    li.append(titulo, acciones);
     list.appendChild(li);
   });
-  summary.textContent = `Total: ${tareas.length}`;
+
+  const { total, pendientes, terminadas } = obtenerResumen(tareas);
+summary.textContent = `Total: ${total} · Pendientes: ${pendientes} · Terminadas: ${terminadas}`;
 }
 
 form.addEventListener("submit", (event) => {
@@ -36,23 +46,24 @@ form.addEventListener("submit", (event) => {
     message.textContent = "Escribe un título antes de agregar.";
     return;
   }
-  tareas.push(titulo); // código deliberadamente acoplado/mutable para refactorizar
+  tareas = agregarTarea(tareas, crearTarea(siguienteId++, titulo));
   input.value = "";
   message.textContent = "";
   render();
 });
 
 list.addEventListener("click", (event) => {
-  const index = event.target.dataset.delete;
-  if (index === undefined) return;
-  tareas.splice(Number(index), 1); // otro punto deliberado de refactor
+  const { toggle, delete: del } = event.target.dataset;
+  if (toggle !== undefined) tareas = cambiarEstado(tareas, Number(toggle));
+  else if (del !== undefined) tareas = eliminarTarea(tareas, Number(del));
+  else return;
   render();
 });
 
 filters.forEach(button => button.addEventListener("click", () => {
   filtro = button.dataset.filter;
   filters.forEach(b => b.classList.toggle("active", b === button));
-  message.textContent = `Filtro '${filtro}' pendiente de integrar durante el refactor.`;
+  render();
 }));
 
 render();

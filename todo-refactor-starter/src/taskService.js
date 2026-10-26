@@ -61,3 +61,9 @@ export function obtenerTerminadas(tareas) {
 export function eliminarTarea(tareas, id) {
   return tareas.filter(t => t.id !== id);
 }
+
+export function filtrarPorEstado(tareas, filtro) {
+  if (filtro === "pendientes") return obtenerPendientes(tareas);
+  if (filtro === "terminadas") return obtenerTerminadas(tareas);
+  return tareas;
+}
