@@ -78,3 +78,26 @@ describe("buscarTarea", () => {
     expect(buscarTarea(tareas, 99)).toBeUndefined();
   });
 });
+
+describe("obtenerPendientes / obtenerTerminadas", () => {
+  const mixta = [
+    { id: 1, titulo: "A", completada: false },
+    { id: 2, titulo: "B", completada: true },
+    { id: 3, titulo: "C", completada: false },
+  ];
+
+  it("separa pendientes en una colección mixta", () => {
+    expect(obtenerPendientes(mixta).map(t => t.id)).toEqual([1, 3]);
+  });
+  it("separa terminadas en una colección mixta", () => {
+    expect(obtenerTerminadas(mixta).map(t => t.id)).toEqual([2]);
+  });
+  it("devuelve [] si ninguna es pendiente", () => {
+    const todasHechas = [{ id: 1, titulo: "A", completada: true }];
+    expect(obtenerPendientes(todasHechas)).toEqual([]);
+  });
+  it("devuelve [] con colección vacía", () => {
+    expect(obtenerPendientes([])).toEqual([]);
+    expect(obtenerTerminadas([])).toEqual([]);
+  });
+});
