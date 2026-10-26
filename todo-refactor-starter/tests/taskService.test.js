@@ -78,3 +78,23 @@ describe("buscarTarea", () => {
     expect(buscarTarea(tareas, 99)).toBeUndefined();
   });
 });
+describe("cambiarEstado", () => {
+  const tareas = [
+    { id: 1, titulo: "A", completada: false },
+    { id: 2, titulo: "B", completada: false },
+  ];
+
+  it("alterna el estado de la tarea correcta", () => {
+    expect(cambiarEstado(tareas, 1)[0].completada).toBe(true);
+  });
+  it("no altera las otras tareas", () => {
+    expect(cambiarEstado(tareas, 1)[1]).toEqual(tareas[1]);
+  });
+  it("con id inexistente conserva el contenido", () => {
+    expect(cambiarEstado(tareas, 99)).toEqual(tareas);
+  });
+  it("no muta el objeto original", () => {
+    cambiarEstado(tareas, 1);
+    expect(tareas[0].completada).toBe(false);
+  });
+});
