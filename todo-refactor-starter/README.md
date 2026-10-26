@@ -73,7 +73,7 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 1 | Pamela | Sebastián |
 |2 `crearTarea`| Sebastián | Pamela || Devolver `{ id, titulo, completada: false }`, el mínimo para que la prueba pasara. | Sin cambios: los nombres `id`, `titulo` y `completada` ya expresan la intención. |
 | 3 | Pamela | Sebastián |
-| 4 | Sebastián | Pamela |
+| 4 `buscarTarea` | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `tareas.find(t => t.id === id)` | Sin cambios. |
 | 5 | Pamela | Sebastián |
 | 6 | Sebastián | Pamela |
 | 7 | Pamela | Sebastián |
@@ -85,3 +85,4 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 ## Decisiones de diseño
 
 - *M3 agregarTarea:* si la función mutara el array recibido, la prueba que lo detecta es verificar que el array original conserva su longitud después de llamarla.
+- **M4 `buscarTarea`:** se usa `find()` porque la intención es encontrar uno; devuelve `undefined` si no existe.
