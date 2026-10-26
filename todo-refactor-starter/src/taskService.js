@@ -49,3 +49,10 @@ export function obtenerResumen(tareas) {
   // TODO: devolver { total, pendientes, terminadas }.
   throw new Error("Misión 8 pendiente: implementar obtenerResumen()");
 }
+export function obtenerPendientes(tareas) {
+  return tareas.filter(t => !t.completada);
+}
+
+export function obtenerTerminadas(tareas) {
+  return tareas.filter(t => t.completada);
+}

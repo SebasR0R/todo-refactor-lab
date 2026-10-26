@@ -72,10 +72,17 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 | 0 | Sebastián | Pamela |
 | 1 | Pamela | Sebastián |
 |2 `crearTarea`| Sebastián | Pamela || Devolver `{ id, titulo, completada: false }`, el mínimo para que la prueba pasara. | Sin cambios: los nombres `id`, `titulo` y `completada` ya expresan la intención. |
+<<<<<<< HEAD
 | 3 `agregarTarea` | Pamela | Sebastián | Las 3 pruebas fallaban porque la función no estaba implementada. | `return [...tareas, nuevaTarea]` | Sin cambios. |
 | 4 `buscarTarea` | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `tareas.find(t => t.id === id)` | Sin cambios. |
 | 5 | Pamela | Sebastián |
 |  6 `cambiarEstado`  | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `map` con `{ ...tarea, completada: !tarea.completada }` | Sin cambios. |
+=======
+| 3 | Pamela | Sebastián || 3 agregarTarea | Las 3 pruebas fallaban porque la función no estaba implementada. | return [...tareas, nuevaTarea] | Sin cambios. |
+| 4 | Sebastián | Pamela |
+| 5 | Pamela | Sebastián || 5 obtenerPendientes / obtenerTerminadas | Las pruebas fallaban porque las funciones no estaban implementadas. | filter(t => !t.completada) y filter(t => t.completada) | Sin cambios. |
+| 6 | Sebastián | Pamela |
+>>>>>>> 2e147b658f53d5f30f44f167eedc633ca1f99ff8
 | 7 | Pamela | Sebastián |
 | 8 | Sebastián | Pamela |
 | 9 | Pamela | Sebastián |
@@ -85,4 +92,4 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 ## Decisiones de diseño
 
 - *M3 agregarTarea:* si la función mutara el array recibido, la prueba que lo detecta es verificar que el array original conserva su longitud después de llamarla.
-- **M4 `buscarTarea`:** se usa `find()` porque la intención es encontrar uno; devuelve `undefined` si no existe.
+*M5 filter:* cuando no hay coincidencias devuelve [], no undefined ni un error.
