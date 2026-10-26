@@ -69,27 +69,28 @@ Integrantes: Sebastián y Pamela. Intercambiamos roles al terminar cada misión 
 
 | Misión | Driver | Navigator |
 |---|---|---|
-| 0 | Sebastián | Pamela |
-| 1 | Pamela | Sebastián |
-|2 `crearTarea`| Sebastián | Pamela || Devolver `{ id, titulo, completada: false }`, el mínimo para que la prueba pasara. | Sin cambios: los nombres `id`, `titulo` y `completada` ya expresan la intención. |
+| 0 | Sebasti├ín | Pamela |
+| 1 | Pamela | Sebasti├ín |
+|2 `crearTarea`| Sebasti├ín | Pamela || Devolver `{ id, titulo, completada: false }`, el m├¡nimo para que la prueba pasara. | Sin cambios: los nombres `id`, `titulo` y `completada` ya expresan la intenci├│n. |
 <<<<<<< HEAD
-| 3 `agregarTarea` | Pamela | Sebastián | Las 3 pruebas fallaban porque la función no estaba implementada. | `return [...tareas, nuevaTarea]` | Sin cambios. |
-| 4 `buscarTarea` | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `tareas.find(t => t.id === id)` | Sin cambios. |
-| 5 | Pamela | Sebastián |
-|  6 `cambiarEstado`  | Sebastián | Pamela | Las pruebas fallaban porque la función no estaba implementada. | `map` con `{ ...tarea, completada: !tarea.completada }` | Sin cambios. |
+| 3 `agregarTarea` | Pamela | Sebasti├ín | Las 3 pruebas fallaban porque la funci├│n no estaba implementada. | `return [...tareas, nuevaTarea]` | Sin cambios. |
+| 4 `buscarTarea` | Sebasti├ín | Pamela | Las pruebas fallaban porque la funci├│n no estaba implementada. | `tareas.find(t => t.id === id)` | Sin cambios. |
+| 5 | Pamela | Sebasti├ín |
+|  6 `cambiarEstado`  | Sebasti├ín | Pamela | Las pruebas fallaban porque la funci├│n no estaba implementada. | `map` con `{ ...tarea, completada: !tarea.completada }` | Sin cambios. |
 =======
-| 3 | Pamela | Sebastián || 3 agregarTarea | Las 3 pruebas fallaban porque la función no estaba implementada. | return [...tareas, nuevaTarea] | Sin cambios. |
-| 4 | Sebastián | Pamela |
-| 5 | Pamela | Sebastián || 5 obtenerPendientes / obtenerTerminadas | Las pruebas fallaban porque las funciones no estaban implementadas. | filter(t => !t.completada) y filter(t => t.completada) | Sin cambios. |
-| 6 | Sebastián | Pamela |
+| 3 | Pamela | Sebasti├ín || 3 agregarTarea | Las 3 pruebas fallaban porque la funci├│n no estaba implementada. | return [...tareas, nuevaTarea] | Sin cambios. |
+| 4 | Sebasti├ín | Pamela |
+| 5 | Pamela | Sebasti├ín || 5 obtenerPendientes / obtenerTerminadas | Las pruebas fallaban porque las funciones no estaban implementadas. | filter(t => !t.completada) y filter(t => t.completada) | Sin cambios. |
+| 6 | Sebasti├ín | Pamela |
 >>>>>>> 2e147b658f53d5f30f44f167eedc633ca1f99ff8
-| 7 | Pamela | Sebastián |
-| 8 | Sebastián | Pamela |
-| 9 | Pamela | Sebastián |
-| 10 | Sebastián | Pamela |
-| 11 | Pamela | Sebastián |
+| 7 | Pamela | Sebasti├ín |
+| 8 | Sebasti├ín | Pamela |
+| 9 | Pamela | Sebasti├ín |
+| 10 | Sebasti├ín | Pamela |
+| 11 | Pamela | Sebasti├ín |
 
 ## Decisiones de diseño
 
-- *M3 agregarTarea:* si la función mutara el array recibido, la prueba que lo detecta es verificar que el array original conserva su longitud después de llamarla.
+- *M3 agregarTarea:* si la funci├│n mutara el array recibido, la prueba que lo detssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssswsta es verificar que el array original conserva su longitud despu├⌐s de llamarla.
 *M5 filter:* cuando no hay coincidencias devuelve [], no undefined ni un error.
+- **M6 `cambiarEstado`:** `map` conserva el tamaño de la colección y el spread crea un objeto nuevo en lugar de modificar el original.
